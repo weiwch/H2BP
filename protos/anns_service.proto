@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package anns_service;
+
+service AnnsService {
+  rpc Search (Query) returns (ResultOfQuery) {}
+  rpc BatchSearch (BatchQuery) returns (BatchResult) {}
+  rpc Insert (BatchInsQuery) returns (ResultOfInsert) {}
+}
+
+message Query {
+  repeated float vec = 1;
+  int32 k = 2;
+}
+
+message BatchQuery {
+  repeated float vec = 1;
+  int32 k = 2;
+  int32 n = 3;
+}
+
+message ResultOfQuery {
+  repeated uint32 ids = 1; 
+}
+
+message BatchResult {
+  repeated ResultOfQuery results = 1;
+}
+
+message BatchInsQuery {
+  repeated float vec = 1;
+  int32 n = 2;
+  int32 start_idx = 3;
+}
+
+message ResultOfInsert {
+  int32 status = 1; 
+}

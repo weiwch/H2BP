@@ -1,0 +1,111 @@
+services:
+  node1:
+    image: mganns_image:latest
+    # privileged: true 
+    command: ["bash", "/entrypoint.sh"]
+    cpuset: '0-11'
+    container_name: node1
+    hostname: node1
+    # deploy:
+    #   resources:
+        # limits:
+        #   cpus: "24"  
+    networks:
+      mpi_net:
+        ipv4_address: 192.168.1.101
+    volumes:
+      - ./:/anns  
+      - ../sift1M:/sift1M
+      - ../deep:/deep
+      - ../laion:/laion
+      - /n1/deep1b:/deep1b
+      - /n1:/n1
+      - ./id_rsa:/root/.ssh/id_rsa  
+      - ./id_rsa.pub:/root/.ssh/id_rsa.pub  
+    environment:
+      - NODE_NAME=node1
+
+  node2:
+    image: mganns_image:latest
+    # privileged: true 
+    command: ["bash", "/entrypoint.sh"]
+    cpuset: '12-23'
+    container_name: node2
+    hostname: node2
+    # deploy:
+    #   resources:
+        # limits:
+        #   cpus: "24"  
+    networks:
+      mpi_net:
+        ipv4_address: 192.168.1.102
+    volumes:
+      - ./:/anns
+      - ../sift1M:/sift1M
+      - ../deep:/deep
+      - ../laion:/laion
+      - /n1/deep1b:/deep1b
+      - /n1:/n1
+      - ./id_rsa:/root/.ssh/id_rsa  
+      - ./id_rsa.pub:/root/.ssh/id_rsa.pub  
+    environment:
+      - NODE_NAME=node2
+
+  node3:
+    image: mganns_image:latest
+    # privileged: true 
+    command: ["bash", "/entrypoint.sh"]
+    cpuset: '24-35'
+    container_name: node3
+    hostname: node3
+    # deploy:
+    #   resources:
+        # limits:
+        #   cpus: "24"  
+    networks:
+      mpi_net:
+        ipv4_address: 192.168.1.103
+    volumes:
+      - ./:/anns
+      - ../sift1M:/sift1M
+      - ../deep:/deep
+      - ../laion:/laion
+      - /n1/deep1b:/deep1b
+      - /n1:/n1
+      - ./id_rsa:/root/.ssh/id_rsa  
+      - ./id_rsa.pub:/root/.ssh/id_rsa.pub  
+    environment:
+      - NODE_NAME=node3
+
+  node4:
+    image: mganns_image:latest
+    # privileged: true 
+    command: ["bash", "/entrypoint.sh"]
+    cpuset: '36-47'
+    container_name: node4
+    hostname: node4
+    # deploy:
+    #   resources:
+        # limits:
+        #   cpus: "24"  
+    networks:
+      mpi_net:
+        ipv4_address: 192.168.1.104
+    volumes:
+      - ./:/anns
+      - ../sift1M:/sift1M
+      - ../deep:/deep
+      - ../laion:/laion
+      - /n1/deep1b:/deep1b
+      - /n1:/n1
+      - ./id_rsa:/root/.ssh/id_rsa  
+      - ./id_rsa.pub:/root/.ssh/id_rsa.pub  
+    environment:
+      - NODE_NAME=node4
+
+networks:
+  mpi_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24

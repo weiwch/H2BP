@@ -1,0 +1,8 @@
+build**
+Release/
+Debug/
+_build/
+binary/
+result/
+id_rsa*
+results/
